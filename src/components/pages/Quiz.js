@@ -8,6 +8,7 @@ import _ from "lodash";
 import { useAuth } from "../../contexts/AuthContext";
 import { getDatabase, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const initialState = null;
 
@@ -38,6 +39,7 @@ export default function Quiz() {
   const [qna, dispatch] = useReducer(reducer, initialState);
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const data = useLocation();
 
   useEffect(() => {
     dispatch({
@@ -83,7 +85,7 @@ export default function Quiz() {
     });
     console.log("here");
 
-    navigate(`/result/${id}`, {state: {qna: qna,},});
+    navigate(`/result/${id}`, { state: { qna: qna } });
   }
 
   return (
@@ -95,6 +97,7 @@ export default function Quiz() {
           <h1>{qna[currentQuestion].title}</h1>
           <h4>Question can have multiple answers</h4>
           <Answers
+            input={true}
             options={qna[currentQuestion].options}
             handleChange={handleAnswerChange}
           />
@@ -104,7 +107,7 @@ export default function Quiz() {
             submit={submit}
             progress={percentage}
           />
-          <MiniPlayer />
+          <MiniPlayer id={id} title={data.state.videoTitle} />
         </>
       )}
     </>

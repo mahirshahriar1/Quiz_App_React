@@ -14,6 +14,9 @@ import { initializeApp } from "firebase/app";
 // export default app;
 
 // firebase configuration
+// console.log(process.env.REACT_APP_API_KEY);
+// console.log(process.env.REACT_APP_PEXELS_API_KEY);
+// console.log(process.env.REACT_APP_API_KEY);
 const app = initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
