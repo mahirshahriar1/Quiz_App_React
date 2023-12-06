@@ -1,5 +1,11 @@
 import {
-  getDatabase,ref,get,limitToFirst,orderByKey,query,startAt,
+  getDatabase,
+  ref,
+  get,
+  limitToFirst,
+  orderByKey,
+  query,
+  startAt,
 } from "firebase/database";
 import { useEffect, useState } from "react";
 
@@ -14,8 +20,12 @@ export default function useVideoList(page) {
       // database related works
       const db = getDatabase();
       const videosRef = ref(db, "videos");
-      const videoQuery = query(videosRef, orderByKey(), 
-                        startAt("" + page), limitToFirst(8)
+     
+      const videoQuery = query(
+        videosRef,
+        orderByKey(),
+        startAt("" + page),
+        limitToFirst(8)
       );
 
       try {
@@ -37,7 +47,9 @@ export default function useVideoList(page) {
         setError(true);
       }
     }
-
+    // setTimeout(() => {
+    //   fetchVideos();
+    // }, 500);
     fetchVideos();
   }, [page]);
 
